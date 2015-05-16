@@ -21,57 +21,60 @@ a {
 }
 
 form {
-	display: inline-block;
+	/*display: inline-block;*/
 }
 
-input {
-	float: left;
-	width: 500px;
-	margin: 0;
-	height: 54px;
-	background-color: #F6F6F6;
-	font-size: 26px;
-	border: 2px solid #999999;
-	box-sizing: border-box;
+input[type="text"]{
+	width:500px;
+}
+/*input {
+float: left;
+width: 500px;
+margin: 0;
+height: 54px;
+background-color: #F6F6F6;
+font-size: 26px;
+border: 2px solid #999999;
+box-sizing: border-box;
 }
 
-	input:focus {
-		background-color: #FFFFFF;
-		outline: none;
-	}
+input:focus {
+	background-color: #FFFFFF;
+	outline: none;
+}
 
-	input[type="text"] {
-		padding-left: 10px;
-		border-right: 0 none;
-		-webkit-border-top-left-radius: 8px;
-		-webkit-border-bottom-left-radius: 8px;
-		-moz-border-radius-topleft: 8px;
-		-moz-border-radius-bottomleft: 8px;
-		border-top-left-radius: 8px;
-		border-bottom-left-radius: 8px;
-	}
+input[type="text"] {
+	padding-left: 10px;
+	border-right: 0 none;
+	-webkit-border-top-left-radius: 8px;
+	-webkit-border-bottom-left-radius: 8px;
+	-moz-border-radius-topleft: 8px;
+	-moz-border-radius-bottomleft: 8px;
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;
+}
 
-	input[type="submit"] {
-		width: 120px;
-		background-color: #999999;
-		-webkit-border-top-right-radius: 8px;
-		-webkit-border-bottom-right-radius: 8px;
-		-moz-border-radius-topright: 8px;
-		-moz-border-radius-bottomright: 8px;
-		border-top-right-radius: 8px;
-		border-bottom-right-radius: 8px;
-		font-family: 'Source Sans Pro', sans-serif;
-		cursor: pointer;
+input[type="submit"] {
+	width: 120px;
+	background-color: #999999;
+	-webkit-border-top-right-radius: 8px;
+	-webkit-border-bottom-right-radius: 8px;
+	-moz-border-radius-topright: 8px;
+	-moz-border-radius-bottomright: 8px;
+	border-top-right-radius: 8px;
+	border-bottom-right-radius: 8px;
+	font-family: 'Source Sans Pro', sans-serif;
+	cursor: pointer;
+}
+	
+	input[type="submit"]:hover {
+		background-color: #BBBBBB;
 	}
-		
-		input[type="submit"]:hover {
-			background-color: #BBBBBB;
-		}
-		
-		input[type="submit"]::-moz-focus-inner {
-			padding: 0;
-			border: 0 none;
-		}
+	
+	input[type="submit"]::-moz-focus-inner {
+		padding: 0;
+		border: 0 none;
+	}*/
 
 img {
 	max-width: 300px;
