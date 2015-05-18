@@ -30,6 +30,12 @@
 		if (!$solr->ping()) {
 			echo '<p class="error">The Solr service is not responding</p>';
 		} else {
+			$resultArray = array();
+			for ($i=0; $i < IMAGES_PER_PAGE; $i++) { 
+				$resultArray[] = isset($_GET["img".$i]) ? $_GET["img".$i]:0;
+			}
+			print_r($resultArray);
+
 			$query = isset($_GET["q"]) ? trim($_GET["q"]) : "";
 			$defType = isset($_GET["d"]) ? trim($_GET["d"]) : "";
 			$params = isset($_GET["params"]) ? trim($_GET["params"]) : "";
@@ -100,15 +106,19 @@
 						
 						if ($num_results > 0) {
 							echo '<section class="results">';
-
+							echo '<form action="" method="get">';
+							$i=0;
 							foreach ($results->response->docs as $doc) { 
 								//echo "$doc->id $doc->title <br />";
 
 								if (isset($doc->url) && !empty($doc->url)) {
 									echo '<div class="image"><a href="' . $doc->url . '" target="_blank"><img src="' . $doc->url . '" alt="" /></a></div>';
+									echo '<input type="checkbox" name="img' . $i .'" value="img' . $i . '" autofocus onfocus="this.value = this.value;"  />';
+									$i = $i+1;
 								}
 							}
-
+							echo '<input type="submit" value="submit relevance" />';
+							echo '</form>';
 							echo '</section>';
 
 							if ($num_pages > 1) {
