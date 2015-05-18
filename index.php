@@ -34,6 +34,7 @@
 			$defType = isset($_GET["d"]) ? trim($_GET["d"]) : "";
 			$params = isset($_GET["params"]) ? trim($_GET["params"]) : "";
 			$fields = isset($_GET["f"]) ? trim($_GET["f"]) : "after,previous,after_weights,previous_weights";
+			$multval = isset($_GET["multval"]) ? true : false;
 			echo '
 				<form action="" method="get">
 				
@@ -41,19 +42,24 @@
 				defType	<input type="text" name="d" value="' . $defType . '" autofocus onfocus="this.value = this.value;" /><br />
 				params	<input type="text" name="params" value="' . $params . '" autofocus onfocus="this.value = this.value;"  /><br />
 				fields (comma separated)	<input type="text" name="f" value="' . $fields . '" autofocus onfocus="this.value = this.value;" />
-
+				<input type="checkbox" name="multval" value="'.($multval? 0 : 1).'" ' . ($multval? 'checked="checked"':"") . '" autofocus onfocus="this.value = this.value;"  />
 					<input type="submit" value="Search" />
 
 				</form>
 			';
-
+			// print_r($multval + "<br />");
 			if (!empty($query)) {
 				try {
 					if(!empty($defType))
 						$url = $url."&defType=".$defType;
 					
-					if(!empty($params))
-						$url = $url.'&'.$params;
+					if(!empty($params)){
+						$s = explode(",", $params);
+						foreach ($s as $p) {
+							$a = explode("=", $p);
+							$url = $url.'&'.$a[0]."=".urlencode($a[1]);	
+						}
+					}
 
 					// if(!empty($fields))
 					// 	$url = $url.'&'.$fields;
@@ -67,7 +73,7 @@
 					$fs = explode(",", $fields);
 
 					$queryFields = "";
-					if(strcmp(strtolower($defType), "myqp") === 0){
+					if($multval){
 						$queryFields = "&q=";
 						foreach ($fs as $f) {
 							foreach ($words as $w) {
@@ -77,7 +83,7 @@
 					}else{
 						$queryFields = "&q=";
 						foreach ($fs as $f) {
-							$queryFields = $queryFields . $f . ':' . urlencode('"' . $query . '"') . "+";
+							$queryFields = $queryFields . $f . ':' . urlencode($query ) . "+";
 						}
 					}
 
