@@ -4,7 +4,7 @@
 	error_reporting(-1);
 	ini_set("display_errors", "On");
 
-	define("IMAGES_PER_PAGE", 20);
+	define("IMAGES_PER_PAGE", 30);
 
 	$page = isset($_GET["p"]) && is_numeric($_GET["p"]) ? intval($_GET["p"]) : 1;
 ?>
@@ -55,8 +55,8 @@
 					if(!empty($params))
 						$url = $url.'&'.$params;
 
-					if(!empty($fields))
-						$url = $url.'&'.$fields;
+					// if(!empty($fields))
+					// 	$url = $url.'&'.$fields;
 					
 
 					$first_res = ($page - 1) * IMAGES_PER_PAGE;
@@ -66,12 +66,21 @@
 					$words = explode(" ", $query);
 					$fs = explode(",", $fields);
 
-					$queryFields = "&q=";
-					foreach ($fs as $f) {
-						foreach ($words as $w) {
-							$queryFields = $queryFields . $f . ':' . $w . "+";
+					$queryFields = "";
+					if(strcmp(strtolower($defType), "myqp") === 0){
+						$queryFields = "&q=";
+						foreach ($fs as $f) {
+							foreach ($words as $w) {
+								$queryFields = $queryFields . $f . ':' . $w . "+";
+							}
+						}
+					}else{
+						$queryFields = "&q=";
+						foreach ($fs as $f) {
+							$queryFields = $queryFields . $f . ':' . urlencode('"' . $query . '"') . "+";
 						}
 					}
+
 					print_r($url.$queryFields);
 					$results = json_decode(file_get_contents($url.$queryFields));
 					//$results = $solr->search($query, 0, 20);
