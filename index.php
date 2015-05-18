@@ -83,7 +83,7 @@
 					}else{
 						$queryFields = "&q=";
 						foreach ($fs as $f) {
-							$queryFields = $queryFields . $f . ':' . urlencode($query ) . "+";
+							$queryFields = $queryFields . $f . ':' . urlencode( '"' . $query . '"') . "+";
 						}
 					}
 
