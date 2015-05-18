@@ -22,7 +22,7 @@
 	</head>
 	
 	<body>
-		<h1>Image Search</h1>
+		<h1><a href="http://localhost">Image Search</a></h1>
 <?php
 		// $solr = new Apache_Solr_Service("ec2-52-5-117-168.compute-1.amazonaws.com", 8983, "/solr/gettingstarted_shard1_replica2");
 		$url = "http://localhost:8983/solr/images/query?";
