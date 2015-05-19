@@ -124,9 +124,8 @@
 
 						$num_results = $results->response->numFound;
 						$num_pages = intval(($num_results - 1) / IMAGES_PER_PAGE) + 1;
-						
+						echo '<input type="text" value="'. $url.$queryFields. '" />';
 						if ($num_results > 0) {
-							echo '<input type="text" value="'. $url.$queryFields. '" />';
 							echo '<section class="results">';
 							echo '<form action="" method="get">';
 							$i=0;
