@@ -7,8 +7,9 @@
 	define("IMAGES_PER_PAGE", 30);
 
 	$page = isset($_GET["p"]) && is_numeric($_GET["p"]) ? intval($_GET["p"]) : 1;
-	$palette =  array("Black", "White", "Red", "Lime", "brown", "lavender", "orange", "Blue", "Yellow", "Cyan", "Aqua", "Magenta", "Fuchsia", "Silver", "Gray", "Maroon", "Olive", "Green", "Purple", "Teal", "Navy");
-	$palette = array_map('strtolower', $palette);
+	// $palette =  array("Black", "White", "Red", "Lime", "brown", "lavender", "orange", "Blue", "Yellow", "Cyan", "Aqua", "Magenta", "Fuchsia", "Silver", "Gray", "Maroon", "Olive", "Green", "Purple", "Teal", "Navy");
+	// $palette = array_map('strtolower', $palette);
+	$palette = array();
 ?>
 <!DOCTYPE html>
 <html lang="en">
