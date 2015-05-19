@@ -7,6 +7,8 @@
 	define("IMAGES_PER_PAGE", 30);
 
 	$page = isset($_GET["p"]) && is_numeric($_GET["p"]) ? intval($_GET["p"]) : 1;
+	$palette =  array("Black", "White", "Red", "Lime", "brown", "lavender", "Blue", "Yellow", "Cyan", "Aqua", "Magenta", "Fuchsia", "Silver", "Gray", "Maroon", "Olive", "Green", "Purple", "Teal", "Navy");
+	$palette = array_map('strtolower', $palette);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,6 +32,7 @@
 		if (!$solr->ping()) {
 			echo '<p class="error">The Solr service is not responding</p>';
 		} else {
+
 			$resultArray = array();
 			for ($i=0; $i < IMAGES_PER_PAGE; $i++) { 
 				$resultArray[] = isset($_GET["img".$i]) ? $i:0;
@@ -57,6 +60,16 @@
 			// print_r($multval + "<br />");
 			if (!empty($query)) {
 				try {
+					
+					$q = array_map('strtolower', explode(" ", $query));
+					$colors = array_intersect($palette, $q);
+					// foreach (explode(" ", $query) as $q) {
+					// 	if(in_array(strtolower($q), $palette)){
+					// 		$colors[] = $q;
+					// 	}
+					// }
+					$q = array_diff($q, $colors);
+					$query = implode(" ", $q);
 					if(!empty($defType))
 						$url = $url."&defType=".$defType;
 					
@@ -65,6 +78,12 @@
 						foreach ($s as $p) {
 							$a = explode("=", $p);
 							$url = $url.'&'.$a[0]."=".urlencode($a[1]);	
+						}
+					}
+
+					if(!empty($colors)){
+						foreach ($colors as $c) {
+							$url = $url."&fq=color:".$c;
 						}
 					}
 
