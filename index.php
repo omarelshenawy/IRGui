@@ -32,9 +32,9 @@
 		} else {
 			$resultArray = array();
 			for ($i=0; $i < IMAGES_PER_PAGE; $i++) { 
-				$resultArray[] = isset($_GET["img".$i]) ? $_GET["img".$i]:0;
+				$resultArray[] = isset($_GET["img".$i]) ? $i:0;
 			}
-			print_r($resultArray);
+			// print_r($resultArray);
 
 			$query = isset($_GET["q"]) ? trim($_GET["q"]) : "";
 			$defType = isset($_GET["d"]) ? trim($_GET["d"]) : "";
@@ -42,6 +42,7 @@
 			$fields = isset($_GET["f"]) ? trim($_GET["f"]) : "after,previous,after_weights,previous_weights";
 			$multval = isset($_GET["multval"]) ? true : false;
 			echo '
+				Relevance <input type="text" value="' .implode(", ", $resultArray). '" /> </br>
 				<form action="" method="get">
 				
 				Query <input type="text" name="q" value="' . $query . '" autofocus onfocus="this.value = this.value;" /><br />
@@ -93,7 +94,7 @@
 						}
 					}
 
-					print_r($url.$queryFields);
+					
 					$results = json_decode(file_get_contents($url.$queryFields));
 					//$results = $solr->search($query, 0, 20);
 					// $results = $solr->search('after_weights:'.$queryFields, $first_res, $first_res + IMAGES_PER_PAGE, array('defType'=>'myqp'));
@@ -105,6 +106,7 @@
 						$num_pages = intval(($num_results - 1) / IMAGES_PER_PAGE) + 1;
 						
 						if ($num_results > 0) {
+							echo '<input type="text" value="'. $url.$queryFields. '" />';
 							echo '<section class="results">';
 							echo '<form action="" method="get">';
 							$i=0;
